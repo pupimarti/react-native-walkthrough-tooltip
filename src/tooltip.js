@@ -4,6 +4,7 @@ import {
   Dimensions,
   InteractionManager,
   Modal,
+  Platform,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
@@ -154,9 +155,11 @@ class Tooltip extends Component {
     const insetsChanged = !rfcIsEqual(prevState.displayInsets, displayInsets);
 
     if (contentChanged || placementChanged || becameVisible || insetsChanged) {
+      if(Platform.OS === 'android')
       setTimeout(() => {
         this.measureChildRect();
-      });
+      }); 
+      else this.measureChildRect();
     }
   }
 
